@@ -1,4 +1,5 @@
 const FD_STDOUT: usize = 1;
+//包含文件 I/O 相关的 syscall
 
 pub fn sys_write(fd: usize, buf: *const u8, len: usize) -> isize {
     match fd {

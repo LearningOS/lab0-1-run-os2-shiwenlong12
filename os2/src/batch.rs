@@ -1,3 +1,5 @@
+//实现了一个简单的批处理系统
+
 use crate::sync::UPSafeCell;
 use crate::trap::TrapContext;
 use lazy_static::*;

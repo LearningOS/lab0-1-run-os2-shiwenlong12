@@ -1,3 +1,5 @@
+//生成 link_app.S 将应用作为一个数据段链接到内核
+
 use std::fs::{read_dir, File};
 use std::io::{Result, Write};
 

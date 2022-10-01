@@ -1,5 +1,6 @@
 use riscv::register::sstatus::{self, Sstatus, SPP};
 
+//包含 Trap 上下文 TrapContext
 #[repr(C)]
 pub struct TrapContext {
     pub x: [usize; 32],
