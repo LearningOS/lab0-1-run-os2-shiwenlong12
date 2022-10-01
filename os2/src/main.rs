@@ -29,6 +29,7 @@ fn clear_bss() {
     }
 }
 
+//主函数中需要初始化 Trap 处理并加载和执行应用
 #[no_mangle]
 pub fn rust_main() -> ! {
     clear_bss();

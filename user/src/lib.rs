@@ -1,4 +1,5 @@
 #![no_std]
+// 启用弱链接特性
 #![feature(linkage)]
 #![feature(panic_info_message)]
 #![feature(alloc_error_handler)]
@@ -44,9 +45,13 @@ fn clear_bss() {
     }
 }
 
+//我们定义了用户库的入口点 _start
 #[no_mangle]
+//使用 link_section 宏将 _start 函数编译后的汇编代码放在名为 .text.entry 的代码段中，
+//方便用户库链接脚本将它作为用户程序的入口
 #[link_section = ".text.entry"]
 pub extern "C" fn _start(argc: usize, argv: usize) -> ! {
+    //手动清零 .bss 段
     clear_bss();
     unsafe {
         HEAP.lock()
@@ -66,9 +71,12 @@ pub extern "C" fn _start(argc: usize, argv: usize) -> ! {
             .unwrap(),
         );
     }
+    //调用 main 函数得到一个类型为 ? 的返回值
+    //最后，调用用户库提供的 exit 接口退出，并将返回值告知批处理系统
     exit(main(argc, v.as_slice()));
 }
 
+// 启用弱链接特性
 #[linkage = "weak"]
 #[no_mangle]
 fn main(_argc: usize, _argv: &[&str]) -> i32 {

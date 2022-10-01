@@ -1,5 +1,7 @@
 mod context;
 
+//包含 Trap 处理入口 trap_handler
+
 use crate::batch::run_next_app;
 use crate::syscall::syscall;
 use riscv::register::{
